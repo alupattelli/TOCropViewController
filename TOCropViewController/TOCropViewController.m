@@ -73,6 +73,7 @@
         _defaultAspectRatio = TOCropViewControllerAspectRatioOriginal;
         _toolbarPosition = TOCropViewControllerToolbarPositionBottom;
         _rotateClockwiseButtonHidden = YES;
+        _minimumCropRectSize = 42.0;
     }
     
     return self;
@@ -655,6 +656,7 @@
         _cropView.delegate = self;
         _cropView.frame = [UIScreen mainScreen].bounds;
         _cropView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _cropView.minimumCropRectSize = self.minimumCropRectSize;
     }
     return _cropView;
 }
@@ -703,6 +705,11 @@
     if (self.rotateButtonsHidden == NO) {
         self.toolbar.rotateClockwiseButtonHidden = _rotateClockwiseButtonHidden;
     }
+}
+
+- (void)setMinimumCropRectSize:(CGFloat)minimumCropRectSize {
+    _minimumCropRectSize = minimumCropRectSize;
+    self.cropView.minimumCropRectSize = minimumCropRectSize;
 }
 
 @end

@@ -28,7 +28,6 @@
 
 static const CGFloat kTOCropViewPadding = 14.0f;
 static const NSTimeInterval kTOCropTimerDuration = 0.8f;
-static const CGFloat kTOCropViewMinimumBoxSize = 42.0f;
 
 /* When the user taps down to resize the box, this state is used
  to determine where they tapped and how to manipulate the box */
@@ -511,18 +510,18 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     }
     
     //The absolute max/min size the box may be in the bounds of the crop view
-    CGSize minSize = (CGSize){kTOCropViewMinimumBoxSize, kTOCropViewMinimumBoxSize};
+    CGSize minSize = (CGSize){self.minimumCropRectSize, self.minimumCropRectSize};
     CGSize maxSize = (CGSize){CGRectGetWidth(contentFrame), CGRectGetHeight(contentFrame)};
     
     //clamp the box to ensure it doesn't go beyond the bounds we've set
     if (self.aspectRatioLocked && aspectHorizontal) {
         maxSize.height = contentFrame.size.width / aspectRatio;
-        minSize.width = kTOCropViewMinimumBoxSize * aspectRatio;
+        minSize.width = self.minimumCropRectSize * aspectRatio;
     }
         
     if (self.aspectRatioLocked && aspectVertical) {
         maxSize.width = contentFrame.size.height * aspectRatio;
-        minSize.height = kTOCropViewMinimumBoxSize / aspectRatio;
+        minSize.height = self.minimumCropRectSize / aspectRatio;
     }
     
     //Clamp the minimum size
@@ -780,8 +779,8 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     cropBoxFrame.size.height = floorf(MIN(cropBoxFrame.size.height, maxHeight));
     
     //Make sure we can't make the crop box too small
-    cropBoxFrame.size.width  = MAX(cropBoxFrame.size.width, kTOCropViewMinimumBoxSize);
-    cropBoxFrame.size.height = MAX(cropBoxFrame.size.height, kTOCropViewMinimumBoxSize);
+    cropBoxFrame.size.width  = MAX(cropBoxFrame.size.width, self.minimumCropRectSize);
+    cropBoxFrame.size.height = MAX(cropBoxFrame.size.height, self.minimumCropRectSize);
     
     _cropBoxFrame = cropBoxFrame;
     

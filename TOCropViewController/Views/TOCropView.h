@@ -111,6 +111,12 @@
 @property (nonatomic, assign) BOOL gridOverlayHidden;
 
 /**
+ Clamp the crop rect to a minimum size
+ */
+@property (nonatomic, assign) CGFloat minimumCropRectSize;
+
+
+/**
  Create a new instance of the crop view with the supplied image
  */
 - (instancetype)initWithImage:(UIImage *)image;

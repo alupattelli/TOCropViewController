@@ -168,6 +168,10 @@ typedef NS_ENUM(NSInteger, TOCropViewControllerToolbarPosition) {
  */
 @property (nonatomic, strong) NSArray *excludedActivityTypes;
 
+/**
+ Clamp the crop rect to a minimum size
+ */
+@property (nonatomic, assign) CGFloat minimumCropRectSize;
 
 
 ///------------------------------------------------
